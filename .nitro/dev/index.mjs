@@ -765,7 +765,9 @@ server.listen(listenAddress, () => {
   process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException]", err));
 }
 
+console.log("[PrismaClient] [before] new PrismaClient()");
 new PrismaClient();
+console.log("[PrismaClient] [after] new PrismaClient()");
 const index = () => {
   return {
     users: "client.user.findMany()"
