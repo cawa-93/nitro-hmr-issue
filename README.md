@@ -1,6 +1,6 @@
 # Reproduction for nitro issue
 
-The vir server hangs if connected to a database
+The dev server hangs if connected to a database
 
 Steps:
 1. Clone repo and run `npm ci`
