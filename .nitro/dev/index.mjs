@@ -765,11 +765,20 @@ server.listen(listenAddress, () => {
   process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException]", err));
 }
 
-console.log("[PrismaClient] [before] new PrismaClient()");
-new PrismaClient();
-console.log("[PrismaClient] [after] new PrismaClient()");
+console.log({ NODE_ENV: "development" });
+console.log("[PrismaClient] [before] new PrismaClient()", { globalThis: typeof globalThis.prisma });
+const prisma = globalThis.prisma || new PrismaClient({
+  log: ["query"]
+});
+console.log("[PrismaClient] [after] new PrismaClient()", { globalThis: typeof globalThis.prisma });
+console.log("[PrismaClient] [before] globalThis.prisma = prisma", { globalThis: typeof globalThis.prisma });
+globalThis.prisma = prisma;
+console.log("[PrismaClient] [after] globalThis.prisma = prisma", { globalThis: typeof globalThis.prisma });
+
 const index = () => {
   return {
+    prisma: typeof prisma.user,
+    foo: 0,
     users: "client.user.findMany()"
   };
 };
