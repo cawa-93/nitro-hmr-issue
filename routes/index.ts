@@ -1,11 +1,9 @@
-import { PrismaClient } from "@prisma/client";
-//
-console.log('[PrismaClient] [before] new PrismaClient()');
-const client = new PrismaClient();
-console.log('[PrismaClient] [after] new PrismaClient()');
+import { prisma } from "../db";
+
 
 export default () => {
     return {
+        prisma: typeof prisma.user, // To prevent possible tree-shaking
         users: 'client.user.findMany()',
     };
 }
