@@ -14,7 +14,7 @@ import { snakeCase } from 'file://C:/Users/kozac/Dev/temp-projects/nitro-app/nod
 import { hash } from 'file://C:/Users/kozac/Dev/temp-projects/nitro-app/node_modules/ohash/dist/index.mjs';
 import { createStorage } from 'file://C:/Users/kozac/Dev/temp-projects/nitro-app/node_modules/unstorage/dist/index.mjs';
 import _unstorage_drivers_fs from 'file://C:/Users/kozac/Dev/temp-projects/nitro-app/node_modules/unstorage/dist/drivers/fs.mjs';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../db.js';
 
 function handleCacheHeaders(event, opts) {
   const cacheControls = ["public"].concat(opts.cacheControls || []);
@@ -765,20 +765,9 @@ server.listen(listenAddress, () => {
   process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException]", err));
 }
 
-console.log({ NODE_ENV: "development" });
-console.log("[PrismaClient] [before] new PrismaClient()", { globalThis: typeof globalThis.prisma });
-const prisma = globalThis.prisma || new PrismaClient({
-  log: ["query"]
-});
-console.log("[PrismaClient] [after] new PrismaClient()", { globalThis: typeof globalThis.prisma });
-console.log("[PrismaClient] [before] globalThis.prisma = prisma", { globalThis: typeof globalThis.prisma });
-globalThis.prisma = prisma;
-console.log("[PrismaClient] [after] globalThis.prisma = prisma", { globalThis: typeof globalThis.prisma });
-
 const index = () => {
   return {
     prisma: typeof prisma.user,
-    foo: 0,
     users: "client.user.findMany()"
   };
 };
