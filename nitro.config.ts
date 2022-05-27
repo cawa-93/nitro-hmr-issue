@@ -3,7 +3,8 @@ import { defineNitroConfig } from 'nitropack'
 export default defineNitroConfig({
     rollupConfig: {
         external: [
-            '@prisma/client'
+            '@prisma/client',
+            '../../db.js'
         ]
     }
 })
