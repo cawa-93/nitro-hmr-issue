@@ -4,10 +4,10 @@
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "3.14.0",
+    "@prisma/client": "^4.10.0",
     "nitropack": "0.4.4"
   },
   "devDependencies": {
-    "prisma": "3.14.0"
+    "prisma": "^4.10.0"
   }
 }
